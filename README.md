@@ -1,1 +1,1 @@
-# Javascript-basic-test
+# Rock-Paper-Scissor
