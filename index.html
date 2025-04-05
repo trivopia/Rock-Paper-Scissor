@@ -8,20 +8,21 @@
   <body>
     <div class="container">
       <h2>Pick a Bet!</h2>
-      <div class="bet-buttons">
-        <button>Rock</button>
-        <button>Paper</button>
-        <button>Scissor</button>
+      <div class="bets">
+        <button class="rock button">Rock</button>
+        <button class="paper button">Paper</button>
+        <button class="scissor button">Scissor</button>
       </div>
-      <div class="results">
-        <div>User Bet: none</div>
-        <button>Duel</button>
-        <div>Computer's Bet: none</div>
+      <div>
+        <div class="userBet">User Bet: none</div>
+        <button class="gameStart">Duel</button>
+        <div class="computerBet">Computer's Bet: none</div>
+        <div class="result"></div>
         <div>
           Logs
-          <div>Wins: 0</div>
-          <div>Loses: 0</div>
-          <div>Draw: 0</div>
+          <li class="logs win">Wins: 0</li>
+          <li class="logs lose">Loses: 0</li>
+          <li class="logs draw">Draws: 0</li>
         </div>
       </div>
     </div>

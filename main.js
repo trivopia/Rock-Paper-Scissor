@@ -1,10 +1,31 @@
-let humanScore = 0;
-let computerScore = 0;
-let drawScore = 0;
+let wins = 0;
+let loses = 0;
+let draws = 0;
 
-for (let i = 1; i <= n; i++) {
-  playRound();
-}
+const allBet = document.querySelectorAll(".button");
+let userChoice = "none";
+
+allBet.forEach((element) => {
+  element.addEventListener("click", function () {
+    userChoice = element.classList[0];
+    document.querySelector(".userBet").textContent = `You chose ${userChoice}!`;
+  });
+});
+
+document.querySelector(".gameStart").addEventListener("click", function () {
+  let computerChose = getComputerChoice();
+  let result = playRound(computerChose, userChoice);
+
+  document.querySelector(
+    ".computerBet"
+  ).textContent = `Computer's Bet: ${computerChose}!`;
+
+  document.querySelector(".result").textContent = `You ${result}!`;
+
+  document.querySelector(`.logs.${result}`).textContent = `${
+    result.charAt(0).toUpperCase() + result.slice(1)
+  }: gg`;
+});
 
 function getComputerChoice() {
   let randNum = Math.floor(Math.random() * 3 + 1);
@@ -18,33 +39,19 @@ function getComputerChoice() {
   }
 }
 
-function getHumanChoice() {
-  let myChoice = prompt("Choose your bet");
-  return myChoice.toLowerCase();
-}
-
-function playRound() {
-  let computerChose = getComputerChoice();
-  let youChose = getHumanChoice();
-
-  console.log("You chose " + youChose + ". Computer chose " + computerChose);
-
-  if (computerChose === youChose) {
-    console.log("Draw!");
-    drawScore++;
+function playRound(computerChose, userChoice) {
+  if (computerChose === userChoice) {
+    draws++;
+    return "draw";
   } else if (
-    (youChose === "rock" && computerChose === "scissor") ||
-    (youChose === "paper" && computerChose === "rock") ||
-    (youChose === "scissor" && computerChose === "paper")
+    (userChoice === "rock" && computerChose === "scissor") ||
+    (userChoice === "paper" && computerChose === "rock") ||
+    (userChoice === "scissor" && computerChose === "paper")
   ) {
-    console.log("You Win!");
-    humanScore++;
+    wins++;
+    return "win";
   } else {
-    console.log("You lose!");
-    computerScore++;
+    loses++;
+    return "lose";
   }
-
-  console.log(
-    `Scoreboard [Wins: ${humanScore} Loses: ${computerScore} Draws: ${drawScore}]`
-  );
 }
