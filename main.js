@@ -1,7 +1,4 @@
-let wins = 0;
-let loses = 0;
-let draws = 0;
-
+const logMap = { wins: 0, loses: 0, draws: 0 };
 const allBet = document.querySelectorAll(".button");
 let userChoice = "none";
 
@@ -9,6 +6,7 @@ allBet.forEach((element) => {
   element.addEventListener("click", function () {
     userChoice = element.classList[0];
     document.querySelector(".userBet").textContent = `You chose ${userChoice}!`;
+    document.querySelector(".computerBet").textContent = "Computer's Bet: none";
   });
 });
 
@@ -24,7 +22,7 @@ document.querySelector(".gameStart").addEventListener("click", function () {
 
   document.querySelector(`.logs.${result}`).textContent = `${
     result.charAt(0).toUpperCase() + result.slice(1)
-  }: gg`;
+  }: ${logMap[result + "s"]}`;
 });
 
 function getComputerChoice() {
@@ -41,17 +39,17 @@ function getComputerChoice() {
 
 function playRound(computerChose, userChoice) {
   if (computerChose === userChoice) {
-    draws++;
+    logMap["draws"]++;
     return "draw";
   } else if (
     (userChoice === "rock" && computerChose === "scissor") ||
     (userChoice === "paper" && computerChose === "rock") ||
     (userChoice === "scissor" && computerChose === "paper")
   ) {
-    wins++;
+    logMap["wins"]++;
     return "win";
   } else {
-    loses++;
+    logMap["loses"]++;
     return "lose";
   }
 }
