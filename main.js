@@ -1,5 +1,6 @@
 const logMap = { wins: 0, loses: 0, draws: 0 };
 const allBet = document.querySelectorAll(".button");
+const resetBtn = document.querySelector(".reset");
 let userChoice = "none";
 
 allBet.forEach((element) => {
@@ -22,7 +23,19 @@ document.querySelector(".gameStart").addEventListener("click", function () {
 
   document.querySelector(`.logs.${result}`).textContent = `${
     result.charAt(0).toUpperCase() + result.slice(1)
-  }: ${logMap[result + "s"]}`;
+  }s: ${logMap[result + "s"]}`;
+});
+
+resetBtn.addEventListener("click", function () {
+  document.querySelector(".userBet").textContent = `User Bet: none`;
+  document.querySelector(".computerBet").textContent = "Computer's Bet: none";
+
+  for (let key in logMap) {
+    logMap[key] = 0;
+    document.querySelector(`.logs.${key.slice(0, -1)}`).textContent = `${
+      key.charAt(0).toUpperCase() + key.slice(1)
+    }: ${logMap[key]}`;
+  }
 });
 
 function getComputerChoice() {
